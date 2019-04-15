@@ -9,7 +9,6 @@
 import UIKit
 
 final public class ZKCarousel: UIView, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource {
-    public var showGradient: Bool = true
     
     public var slides : [ZKCarouselSlide] = [] {
         didSet {
@@ -122,7 +121,6 @@ final public class ZKCarousel: UIView, UICollectionViewDelegateFlowLayout, UICol
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "slideCell", for: indexPath) as! carouselCollectionViewCell
         cell.slide = self.slides[indexPath.item]
-        cell.showGradient = self.showGradient
         return cell
     }
     
@@ -151,20 +149,6 @@ final public class ZKCarousel: UIView, UICollectionViewDelegateFlowLayout, UICol
 }
 
 fileprivate class carouselCollectionViewCell: UICollectionViewCell {
-    var showGradient: Bool = true {
-        didSet {
-            let iv = UIImageView()
-            iv.contentMode = .scaleAspectFill
-            iv.backgroundColor = .clear
-            iv.clipsToBounds = true
-            if(showGradient) {
-                iv.addBlackGradientLayer(frame: self.bounds)
-            }
-            iv.translatesAutoresizingMaskIntoConstraints = false
-            imageView = iv
-        }
-    }
-    
     fileprivate var slide : ZKCarouselSlide? {
         didSet {
             guard let slide = slide else {
@@ -180,7 +164,6 @@ fileprivate class carouselCollectionViewCell: UICollectionViewCell {
         iv.contentMode = .scaleAspectFill
         iv.backgroundColor = .clear
         iv.clipsToBounds = true
-        iv.addBlackGradientLayer(frame: self.bounds)
         iv.translatesAutoresizingMaskIntoConstraints = false
         return iv
     }()
