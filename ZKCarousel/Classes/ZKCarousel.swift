@@ -151,7 +151,19 @@ final public class ZKCarousel: UIView, UICollectionViewDelegateFlowLayout, UICol
 }
 
 fileprivate class carouselCollectionViewCell: UICollectionViewCell {
-    var showGradient: Bool = true
+    var showGradient: Bool = true {
+        didSet {
+            let iv = UIImageView()
+            iv.contentMode = .scaleAspectFill
+            iv.backgroundColor = .clear
+            iv.clipsToBounds = true
+            if(showGradient) {
+                iv.addBlackGradientLayer(frame: self.bounds)
+            }
+            iv.translatesAutoresizingMaskIntoConstraints = false
+            imageView = iv
+        }
+    }
     
     fileprivate var slide : ZKCarouselSlide? {
         didSet {
@@ -168,9 +180,7 @@ fileprivate class carouselCollectionViewCell: UICollectionViewCell {
         iv.contentMode = .scaleAspectFill
         iv.backgroundColor = .clear
         iv.clipsToBounds = true
-        if(self.showGradient) {
-            iv.addBlackGradientLayer(frame: self.bounds)
-        }
+        iv.addBlackGradientLayer(frame: self.bounds)
         iv.translatesAutoresizingMaskIntoConstraints = false
         return iv
     }()
