@@ -9,7 +9,7 @@
 import UIKit
 
 final public class ZKCarousel: UIView, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource {
-    var showGradient: Bool = true
+    public var showGradient: Bool = true
     
     public var slides : [ZKCarouselSlide] = [] {
         didSet {
